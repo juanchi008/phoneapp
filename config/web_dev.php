@@ -1,13 +1,35 @@
 <?php
 
-$params = require(__DIR__ . '/params.php');
+$params = require(__DIR__ . '/params_dev.php');
 
 $config = [
-    'id' => 'basic',
+    'id' => 'app',
+    'name' => 'Phone Directory',
+    'version' => '1.0',
+	// Preload the Debug Module
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+//	'extensions' => require(__DIR__ . '/../vendor/yiisoft/extensions.php'),
+    'bootstrap' => [
+    	'log',
+    	'debug',
+    	'gii',
+	],
 	'language'=>'es',
     'components' => [
+		// UrlManager
+
+		'urlManager' => [
+			'class' => 'yii\web\UrlManager',
+			
+			// Disable index.php
+			'showScriptName' => false,
+			
+			// Disable r= routes
+			'enablePrettyUrl' => true,
+				
+			//'rules' => [],
+		],
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '3Gz1z1lTCfSPoe6k_orbeX7fNzIrnvaN',
@@ -16,7 +38,6 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            //'identityClass' => 'app\models\User',
             'identityClass' => 'app\models\Identity',
             'enableAutoLogin' => true,
         ],
@@ -29,7 +50,7 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
-        ],                
+        ],                    
     	'fn' => [
             'class' => 'app\components\Fn',
     	],
@@ -42,19 +63,18 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
-		'urlManager' => [
-			'class' => 'yii\web\UrlManager',
-			
-			// Disable index.php
-			'showScriptName' => false,
-			
-			// Disable r= routes
-			'enablePrettyUrl' => true,
-
-			//'rules' => [],
+    		/*
+		'pdf' => [
+	        'class' => Pdf::classname(),
+	        'format' => Pdf::FORMAT_A4,
+	        'orientation' => Pdf::ORIENT_PORTRAIT,
+	        'destination' => Pdf::DEST_BROWSER,
+	        // refer settings section for all configuration options
 		],
+		*/
+        'db' => require(__DIR__ . '/db_dev.php'),
     ],
+
 	// Modules
 	'modules' => [
 		'debug' => [
@@ -67,8 +87,9 @@ $config = [
 	],
     'params' => $params,
 ];
-
+/*
 if (YII_ENV_DEV) {
+	
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
@@ -78,7 +99,9 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+		'allowedIPs' => ['127.0.0.1', '::1', '10.1.1.*', '184.163.110.10'],
     ];
 }
+*/
 
 return $config;

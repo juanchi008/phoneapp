@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
+		'class' => 'yii\db\Connection',
+		'dsn' => 'mysql:host='.$devIP.';dbname=phoneapp',
+		'username' => 'phoneapp_user',
+		'password' => 'phoneapp_pass',
+		'charset' => 'utf8',
 ];
