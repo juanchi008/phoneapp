@@ -1,5 +1,6 @@
 <?php
 // File name of Yii configuration
+// Test zendstudio 11
 $yiiConfigFiles = "web.php";
 
 $devIP = '127.0.0.1';
